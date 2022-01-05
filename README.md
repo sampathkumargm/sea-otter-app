@@ -1,12 +1,16 @@
-# Getting Started with Create React App
+# Getting Started with Sea Otter App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+Download or Clone the project from https://github.com/sampathkumarm/sea-otter-app.git locally.
 
-In the project directory, you can run:
+# Launch the project
 
-### `npm start`
+Open Terminal or CMD and run `cd sea-otter-app`
+
+#### `npm install`
+
+#### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
