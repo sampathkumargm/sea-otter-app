@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import SearchControl from "./components/Search/SearchControl";
+import SearchResult from "./components/Search/SearchResult";
 
-function App() {
+const App = () => {
+  const [result, setResult] = useState([]);
+  const [language, setLanguage] = useState("");
+
+  const searchProjectsHandler = (projects) => {
+    setResult([...projects]);
+    // setResult((prevProjects) => [...prevProjects, ...projects]);
+  };
+
+  const languageHandler = (selectedLang) => {
+    setLanguage(selectedLang);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <SearchControl
+        searchProjects={searchProjectsHandler}
+        lang={languageHandler}
+      />
+      <SearchResult items={result} selectedLang={language} />
     </div>
   );
-}
+};
 
 export default App;
