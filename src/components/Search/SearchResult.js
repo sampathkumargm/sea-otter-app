@@ -1,15 +1,9 @@
 const SearchResult = (props) => {
-  console.log(props.items, props.selectedLang);
-
-  if (props.items.length === 0) {
-    return null;
-  }
-
   return (
     <>
-      <h2>Search Results</h2>
+      <h2>Search Results (found {props.items.length} projects)</h2>
       <div className="card">
-        <table className="table">
+        <table className="table mb-0">
           <thead>
             <tr>
               <th scope="col">Project Name</th>
@@ -17,16 +11,12 @@ const SearchResult = (props) => {
             </tr>
           </thead>
           <tbody>
-            {props.items.map(
-              (item) =>
-                props.selectedLang.toLowerCase() ===
-                  item.language.toLowerCase() && (
-                  <tr key={item.id}>
-                    <td>{item.name}</td>
-                    <td>{item.language}</td>
-                  </tr>
-                )
-            )}
+            {props.items.map((item) => (
+              <tr key={item.id}>
+                <td>{item.name}</td>
+                <td>{item.language}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

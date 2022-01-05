@@ -15,18 +15,24 @@ const SearchControl = (props) => {
       return;
     }
 
-    if (languageRef.current.selectedIndex === 0) {
+    if (selectedLanguage.trim().length === 0) {
       console.log("Please select a language.");
       return;
     }
 
     fetch(
-      `https://api.github.com/search/repositories?q=${enteredProjectName}&language=${selectedLanguage}`
+      `https://api.github.com/search/repositories?q=${enteredProjectName}+language:${selectedLanguage}`
     )
       .then((response) => response.json())
-      .then((data) => props.searchProjects(data.items));
+      .then((data) => {
+        const filteredProjects = data.items
+          .filter((project) => project.name.includes(enteredProjectName))
+          .filter(
+            (project) => project.language.toLowerCase() === selectedLanguage
+          );
 
-    props.lang(selectedLanguage);
+        props.searchProjects(filteredProjects);
+      });
   };
 
   return (
@@ -44,18 +50,18 @@ const SearchControl = (props) => {
           />
         </div>
         <div className="col mb-3">
-          <label>Select a language:</label>
+          <label>Select a programming language:</label>
           <select className="form-select" required ref={languageRef}>
-            <option>Choose...</option>
-            <option>JavaScript</option>
-            <option>Python</option>
-            <option>Java</option>
-            <option>PHP</option>
+            <option value="">Choose...</option>
+            <option value="javascript">JavaScript</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+            <option value="php">PHP</option>
           </select>
         </div>
         <div>
           <button type="submit" className="btn btn-primary">
-            Search
+            Search Projects
           </button>
         </div>
       </form>
