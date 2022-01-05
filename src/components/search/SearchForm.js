@@ -1,4 +1,6 @@
 import { useRef } from "react";
+import { GithubAction } from "../store/actions/GithubAction";
+import store from "../store";
 
 const SearchControl = (props) => {
   const projectNameRef = useRef();
@@ -31,7 +33,7 @@ const SearchControl = (props) => {
             (project) => project.language.toLowerCase() === selectedLanguage
           );
 
-        props.searchProjects(filteredProjects);
+        store.dispatch(GithubAction(filteredProjects));
       });
   };
 

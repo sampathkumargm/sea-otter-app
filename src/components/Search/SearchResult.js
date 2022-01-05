@@ -1,7 +1,17 @@
-const SearchResult = (props) => {
+import { useSelector } from "react-redux";
+
+const projectSelector = (state) => state.projects;
+
+const SearchResult = () => {
+  const projects = useSelector(projectSelector);
+
+  if (projects.length === 0) {
+    return <h2>{projects.length} projects found.</h2>;
+  }
+
   return (
     <>
-      <h2>Search Results (found {props.items.length} projects)</h2>
+      <h2>Search Results (found {projects.length} projects)</h2>
       <div className="card">
         <table className="table mb-0">
           <thead>
@@ -11,7 +21,7 @@ const SearchResult = (props) => {
             </tr>
           </thead>
           <tbody>
-            {props.items.map((item) => (
+            {projects.map((item) => (
               <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{item.language}</td>
